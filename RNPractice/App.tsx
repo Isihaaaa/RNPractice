@@ -1,28 +1,15 @@
 import React from 'react';
-import Login from './App/Login/Login';
-import {Provider} from 'react-redux';
-import CreateStore, {createStore} from 'redux';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { counterReducer } from './App/store/reducer';
+import Application from './App/Application';
 
-const initialState = {
-  counter: 0,
-};
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'INCREASE_COUNTER':
-      return {counter: state.counter + 1};
-    case 'DECREASE_COUNTER':
-      return {counter: state.counter - 1};
-  }
-  return state;
-};
-const store = createStore(reducer);
+const store = createStore(counterReducer);
 
-const App = () => {
+export default function App() {
   return (
     <Provider store={store}>
-      <Login counter={store.getState().counter} />
+      <Application />
     </Provider>
   );
-};
-
-export default App;
+}
